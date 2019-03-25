@@ -1,0 +1,28 @@
+Wuliang Cheng
+Tianze Huang
+Gabriela Gutierrez Nitorreda
+Yuta Takano
+ 
+
+Proposal :
+“T-Tracker”
+      	This project will track all the currently running subway trains in Boston in real time. Because the train goes slowly and take different routes in turns, this application can help users utilize their time better instead of having to wait in the station for a long time. The users will log into their Google Account and the application can use Google Map and MBTa API to present a graphical indication of where all the trains are and their expected arrival time at a certain station.
+
+*************************************************************
+Proposal: 
+-> Selected by TF Compare your Commute 
+This app will take User input of source and destination and output by user selection routes in price order or in duration order. 
+Comparisons for price will be made between MBTA* API, uber API, and gas price API coupled with Google maps routing (ie Google maps distance x price per mile). 
+Comparisons for speed also made between MBTA*, uber, and Google maps car. Could also add bicycle and walking times from Google maybe. DB can be used for storing locations, favorite routes... 
+
+*Update: Google maps has transit in their API, so as long as it reflects Realtime into (delays and route changes) we can just use that. We will also probably need to hard code the MBTA prices into the output but that shouldn’t be too hard. 
+***************************************************************
+
+Proposal:
+“Boston House Hunter”
+      	This project will collect your needs for a house (place, price, house type, etc) and access to the database to output a list of accordant results. There will be other information like pictures of the house and the link to the website of the housing company being presented on the application. This data will be cross-referenced with the area’s crime data thru a criminal activity API. The users can log into their Google Account (with google authentication) when using this application and bookmark the house they want to keep an eye on.
+
+
+Proposal:
+“Can I get a Seat?”
+This project will give users a prediction of how crowded their commute will be. Users will input their starting location and destination as well as when they are leaving. Their route data (Google Maps Directions API) will be checked against the MBTA vehicle and service status (MBTA API) as well as events located near the route (Ticketmaster Discovery API) to give an idea of how crowded the T will be at the desired commute time. Users can log in with their Google accounts as well as create profiles where they can store frequently used commutes.

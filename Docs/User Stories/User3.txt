@@ -1,0 +1,5 @@
+User Story 3 - Non-logged in user
+
+User who is not logged in will have access to all the functionality of the app EXCEPT being able to:
+ - save locations
+ - access previous locations and routes 

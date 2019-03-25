@@ -1,0 +1,6 @@
+User Story 1 - Login story
+
+
+User should be able to login and authenticate by using their Google account. User should also be able to log out of their account and potentially log into another account. 
+
+User does not need to be logged in to access routing and comparison services, but will not be able to save locations. 

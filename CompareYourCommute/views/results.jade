@@ -1,0 +1,15 @@
+
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    p #{start} to #{end}
+    p Duration is: #{duration}
+    p Mode is: #{mode}
+
+    button(onclick="move()") New Search
+    script.
+        function move() {
+            window.location.href = '/'
+        }

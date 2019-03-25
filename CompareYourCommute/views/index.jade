@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  p Please enter your search parameters
+
+
+
+    form(name="find-duration", method="post")
+      div.input
+        span.label Preferred Travel Mode
+        input(type="select")
+
+        <select name="travelmode">
+        <option value="Walking">Walking</option>
+        <option value="Driving">Car</option>
+        <option value="Transit">Public Transit</option>
+        <option value="Uber">Uber</option>
+        </select>
+
+      div.actions
+        input(type="submit", value="Submit")
