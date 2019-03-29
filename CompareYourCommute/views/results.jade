@@ -4,9 +4,20 @@ extends layout
 block content
     h1= title
     p Welcome to #{title}
-    p #{start} to #{end}
-    p Duration is: #{duration}
-    p Mode is: #{mode}
+
+    p From #{start}
+    p To #{end}
+
+    each val, index in mode
+        if (duration[index])
+            p #{val}: #{duration[index]}
+        else
+            p #{val}: No duration found
+
+
+
+
+
 
     button(onclick="move()") New Search
     script.

@@ -11,3 +11,8 @@ Using user inputted source and destination locations, this app lists routes betw
 - Potentially MBTA API (depending on amount of detail provided in Google transit)
 
 Users can sign in through their Google accounts and save favorite locations and routes in a db.
+
+
+**************
+Had security issue with API key in previous repo. Old repo deleted.
+**************

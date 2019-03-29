@@ -7,16 +7,14 @@ block content
 
 
     form(name="find-duration", method="post")
-      div.input
-        span.label Preferred Travel Mode
-        input(type="select")
 
-        <select name="travelmode">
-        <option value="Walking">Walking</option>
-        <option value="Driving">Car</option>
-        <option value="Transit">Public Transit</option>
-        <option value="Uber">Uber</option>
-        </select>
+
+      div.input
+        span.label Start Address:
+        textarea(name="start_address", cols="40", rows="1")
+      div.input
+        span.label End Address:
+        textarea(name="end_address", cols="40", rows="1")
 
       div.actions
         input(type="submit", value="Submit")
