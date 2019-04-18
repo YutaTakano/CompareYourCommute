@@ -5,8 +5,13 @@ block content
   //h2= error.status
   //pre #{error.stack}
 
+  noscript
+        p JavaScript appears to be disabled or not supported on your browser.
+        p Please re-enable or use a supported browser for full functionality.
+
   button(onclick="move()") New Search
   script.
+
     function move() {
       window.location.href = '/'
     }
