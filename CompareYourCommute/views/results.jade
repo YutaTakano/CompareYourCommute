@@ -8,11 +8,21 @@ block content
     p From #{start}
     p To #{end}
 
+
+    h2 Sorted by Travel Time:
     each val, index in mode
         if (duration[index])
             p #{val}: #{duration[index]}
         else
             p #{val}: No duration found
+
+
+
+    h2 Sorted by price:
+    each value in prices
+        p #{value[0]}: #{value[1]}
+
+
 
 
     noscript
