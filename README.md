@@ -6,7 +6,8 @@ Considering adding an option for up to 4 commuters to price compare.
 
 Using user inputted source and destination locations, this app lists routes between the two in order of commute price or commute duration using:
 - Google Maps API(s) 
-- mygasfeed API (local gas prices)
+- Wolfram Alpha API instead of mygasfeed API (local gas prices)
+    - masgasfeed API data appeared to not have been updated in about 6 years, wolfram was the only alternative I could find
 - Uber API
 - Potentially MBTA API (depending on amount of detail provided in Google transit)
 
