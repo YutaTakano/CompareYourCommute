@@ -8,6 +8,7 @@ const parser = require('fast-xml-parser');
 const GOOGLE_DIRECTIONS = keys.KEYS.GOOGLE_DIRECTIONS_KEY;
 //const MYGASFEED = keys.GAS_FEED_KEY; // Removed because of out-dated data
 const WOLFRAM = keys.KEYS.WOLFRAM_KEY;
+const UBER = keys.KEYS.UBER_SERVER_TOKEN;
 
 /* From stack overflow - for parsing POST data */
 const bodyParser = require("body-parser");
@@ -36,6 +37,7 @@ router.get('/', function(req,res,next) {
 
 
 // -------------------------------------------------------------------------------------------------------
+
 router.post('/', function (req, res) {
 
 
@@ -47,8 +49,8 @@ router.post('/', function (req, res) {
     /* To store JSON object from API call */
     let start;
     let end;
-    let start_coord;
-    let end_coord;
+    let start_coord = [];
+    let end_coord = [];
     let modes = [];
     let durations = [];
 
@@ -61,6 +63,17 @@ router.post('/', function (req, res) {
             destination: req.body.end_address
         };
 
+    // Function to convert seconds into hours and minutes
+    function time_convert(num) {
+        var hours = Math.floor(num / 3600);
+        var minutes = Math.floor(num / 60);
+        if (hours > 0) {
+            return hours + " hours " + minutes + " minutes";
+        }
+        else{
+            return minutes + " minutes";
+        }
+    }
 
     function walking_api() {
         return new Promise(function (resolve, reject) {
@@ -145,9 +158,10 @@ router.post('/', function (req, res) {
                     // Grab the driving distance in meters for use later in gas_api
                     drive_distance = parseInt((result.routes[0].legs[0].distance.value));
 
-                    // Grab the lat long coordinates to pump into the gasfeed api
-                    start_coord = [result.routes[0].legs[0].start_location[0], result.routes[0].legs[0].start_location[1]];
-                    end_coord = [result.routes[0].legs[0].end_location[0], result.routes[0].legs[0].end_location[1]];
+                    // Grab the lat long coordinates to pump into the later apis
+                    start_coord.push (result.routes[0].legs[0].start_location.lat,result.routes[0].legs[0].start_location.lng);
+                    end_coord.push (result.routes[0].legs[0].end_location.lat, result.routes[0].legs[0].end_location.lng);
+
 
                     start = result.routes[0].legs[0].start_address;
                     end = result.routes[0].legs[0].end_address;
@@ -286,9 +300,76 @@ router.post('/', function (req, res) {
 
     /* ------------------------------------- */
 
-    // This promise.all gathers all the data from API calls, sorts the data in order, and spits it out in a res.render
+    // This promise.all gathers all the data from 3 Google API calls
+    // Then calls on Uber price estimate using lat-long from Google
+    // Then calls on Wolfram for gas price also using same lat-long from Google
+    // Then sorts the data returned from these calls
+    // Then res.render
 
     Promise.all([walking, cycling, driving])
+        .then(function(){
+            // Gets an uber price estimate
+            return new Promise(function(resolve){
+                try {
+
+                    // Uber Price Estimate Params
+
+                    console.log('start is ', start_coord, typeof(start_coord[0])); //TODO Fix this
+
+                    const options = {
+                        method: 'GET',
+                        url: 'https://api.uber.com/v1.2/estimates/price?',
+                        qs:
+                            {
+                                start_latitude: start_coord[0],
+                                start_longitude: start_coord[1],
+                                end_latitude: end_coord[0],
+                                end_longitude: end_coord[1]
+
+                            },
+                        headers:
+                            { 'Postman-Token': 'b4efb06c-6e5c-4573-a6e7-04c688c2c70c',
+                                'cache-control': 'no-cache',
+                                'Content-Type': 'application/json',
+                                Authorization: UBER }
+                    };
+
+
+                    request(options, function (err, res, inhalt) {
+
+                        const uber_mode_options = {
+                            UberPool: 'UberPool',
+                            UberX:'UberX',
+                            UberXL:'UberXL',
+                            Black:'Uber Black',
+                            'Black SUV':'Uber Black SUV',
+                            WAV: 'Uber WheelChair Accessible'
+                        };
+
+                        let result = JSON.parse(inhalt);
+
+                        for (let k = 0; k < result.prices.length; k++){
+                            const each_result = result.prices[k];
+                            const each_mode = result.prices[k].localized_display_name;
+                            if(each_mode in uber_mode_options){
+                                let mode = uber_mode_options[each_mode];
+                                price_data.push([mode,each_result.estimate]);
+                                data.push([mode, time_convert(each_result.duration), each_result.duration])
+                            }
+                        }
+
+                        console.log(result);
+                        resolve(inhalt, res);
+
+                    })
+                } catch (err) {
+                    reject(err);
+                    console.log(err);
+                }
+
+            })
+
+        })
         .then(function () {
 
             data = data.sort(function (a, b) {
@@ -305,18 +386,14 @@ router.post('/', function (req, res) {
         .then(function () {
             return new Promise(function (resolve) {
                 try {
-                    // Grabs the City, State, and Country of the start address
 
-                    //TODO: need to figure out why this is not working the way it is supposed to !!!!!!!!!!!!!!!!!!!!!!!!
-                    //const start_city = start.split(',').slice(-3);
-                    //const start_city = "Boston, MA";
 
                     /* Post request setup to the Wolfram API for Gas Price Avg */
                     const options = {
                         method: 'GET',
                         url: 'http://api.wolframalpha.com/v2/query',
                         qs:
-                            {
+                            {                                     // Grabs the City, State, and Country of the start address
                                 input: 'average gas prices in ' + start.split(',').slice(-3),//start_city,
                                 appid: WOLFRAM
                             },
@@ -326,7 +403,6 @@ router.post('/', function (req, res) {
                                 'cache-control': 'no-cache'
                             }
                     };
-
 
                     request(options, function (err, res, inhalt) {
 
@@ -352,7 +428,7 @@ router.post('/', function (req, res) {
 
                         let cost = (drive_distance / 1609.344) * dpg / 20; // using 20 as an estimated average mpg
 
-                        price_data.push(['DRIVING', cost.toFixed(2)]);
+                        price_data.push(['Driving', '$'+cost.toFixed(2)]);
                         console.log(price_data);
 
 
