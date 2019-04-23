@@ -10,17 +10,31 @@ block content
 
 
     h2 Sorted by Travel Time:
-    each val, index in mode
-        if (duration[index])
-            p #{val}: #{duration[index]}
-        else
-            p #{val}: No duration found
-
-
+    #table-wrapper
+        table#desc
+           tr
+               th Transit Mode
+               th Duration
+               each val, index in mode
+                    if (duration[index])
+                        tr
+                            td #{val}
+                            td #{duration[index]}
+                    else
+                        tr
+                            td #{val}
+                            td None Found
 
     h2 Sorted by price:
-    each value in prices
-        p #{value[0]}: #{value[1]}
+    table
+        tr
+            th Transit Mode
+            th Price Estimate
+            each value in prices
+                    tr
+                        td #{value[0]}
+                        td #{value[1]}
+
 
 
 
