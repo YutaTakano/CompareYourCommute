@@ -3,15 +3,11 @@ const router = express.Router();
 const request = require('request');
 const keys = require('../config/keys');
 
-
 const parser = require('fast-xml-parser');
-const he = require('he');
 
-
-const GOOGLE_DIRECTIONS = keys.GOOGLE_DIRECTIONS_KEY;
-//const MYGASFEED = keys.GAS_FEED_KEY;
-const WOLFRAM = keys.WOLFRAM_KEY;
-
+const GOOGLE_DIRECTIONS = keys.KEYS.GOOGLE_DIRECTIONS_KEY;
+//const MYGASFEED = keys.GAS_FEED_KEY; // Removed because of out-dated data
+const WOLFRAM = keys.KEYS.WOLFRAM_KEY;
 
 /* From stack overflow - for parsing POST data */
 const bodyParser = require("body-parser");
@@ -39,7 +35,6 @@ router.get('/', function(req,res,next) {
 });
 
 
-
 // -------------------------------------------------------------------------------------------------------
 router.post('/', function (req, res) {
 
@@ -59,7 +54,7 @@ router.post('/', function (req, res) {
 
     let drive_distance;
 
-    /* Input form data for start and end addresses */
+    // Input form data for start and end addresses
     const inputdata =
         {
             start: req.body.start_address,
@@ -67,9 +62,8 @@ router.post('/', function (req, res) {
         };
 
 
-
-    function walking_api () {
-        return new Promise (function (resolve, reject) {
+    function walking_api() {
+        return new Promise(function (resolve, reject) {
 
 
             /* Post request setup to the directions API */
@@ -91,31 +85,32 @@ router.post('/', function (req, res) {
             };
 
 
-            request(options, function (err,res,inhalt) {
+            request(options, function (err, res, inhalt) {
 
-                resolve(inhalt,res);
+
                 //console.log(inhalt);
 
-                let result = JSON.parse(inhalt);
+                try {
+                    let result = JSON.parse(inhalt);
 
+                    let travel_mode = (result.routes[0].legs[0].steps[0].travel_mode);
+                    let travel_secs = (result.routes[0].legs[0].duration.value); // travel time in seconds, need to standardize to compare
+                    let travel_time = (result.routes[0].legs[0].duration.text);
 
-                let travel_mode = (result.routes[0].legs[0].steps[0].travel_mode);
-                let travel_secs = (result.routes[0].legs[0].duration.value); // travel time in seconds, need to standardize to compare
-                let travel_time = (result.routes[0].legs[0].duration.text);
+                    data.push([travel_mode, travel_time, travel_secs]);
+                    resolve(inhalt, res);
+                } catch (err) {
+                    reject(err)
+                }
 
-                data.push([travel_mode,travel_time,travel_secs]);
 
             })
         })
-            .catch((err) => {
-                console.log(err);
-            });
+
     }
 
-    function driving_api () {
-        return new Promise (function (resolve, reject) {
-
-            //if (error) {reject(error + ' Walking Promise rejected');}
+    function driving_api() {
+        return new Promise(function (resolve, reject) {
 
             /* Post request setup to the directions API */
             const options = {
@@ -136,45 +131,41 @@ router.post('/', function (req, res) {
             };
 
 
-            request(options, function (err,res,inhalt) {
+            request(options, function (err, res, inhalt) {
 
 
                 //console.log(inhalt);
+                try {
+                    let result = JSON.parse(inhalt);
 
-                let result = JSON.parse(inhalt);
+                    let travel_mode = (result.routes[0].legs[0].steps[0].travel_mode);
+                    let travel_secs = (result.routes[0].legs[0].duration.value); // travel time in seconds, need to standardize to compare
+                    let travel_time = (result.routes[0].legs[0].duration.text);
 
-                let travel_mode = (result.routes[0].legs[0].steps[0].travel_mode);
-                let travel_secs = (result.routes[0].legs[0].duration.value); // travel time in seconds, need to standardize to compare
-                let travel_time = (result.routes[0].legs[0].duration.text);
+                    // Grab the driving distance in meters for use later in gas_api
+                    drive_distance = parseInt((result.routes[0].legs[0].distance.value));
 
-                // Grab the driving distance in meters for use later in gas_api
-                drive_distance = parseInt((result.routes[0].legs[0].distance.value));
+                    // Grab the lat long coordinates to pump into the gasfeed api
+                    start_coord = [result.routes[0].legs[0].start_location[0], result.routes[0].legs[0].start_location[1]];
+                    end_coord = [result.routes[0].legs[0].end_location[0], result.routes[0].legs[0].end_location[1]];
 
-                // Grab the lat long coordinates to pump into the gasfeed api
-                start_coord = [result.routes[0].legs[0].start_location[0],result.routes[0].legs[0].start_location[1]];
-                end_coord = [result.routes[0].legs[0].end_location[0],result.routes[0].legs[0].end_location[1]];
+                    start = result.routes[0].legs[0].start_address;
+                    end = result.routes[0].legs[0].end_address;
 
-                start = result.routes[0].legs[0].start_address;
-                end = result.routes[0].legs[0].end_address;
+                    data.push([travel_mode, travel_time, travel_secs]);
+                    resolve(inhalt, res);
 
-                data.push([travel_mode,travel_time,travel_secs]);
-
-                resolve(inhalt,res);
+                } catch (err) {
+                    reject(err);
+                }
 
 
             })
-
         })
-            .catch((err) => {
-                console.log(err);
-            });
-
     }
 
-    function cycling_api () {
-        return new Promise (function (resolve, reject) {
-
-
+    function cycling_api() {
+        return new Promise(function (resolve, reject) {
 
             /* Post request setup to the directions API */
             const options = {
@@ -195,26 +186,30 @@ router.post('/', function (req, res) {
             };
 
 
-            request(options, function (err,res,inhalt) {
+            request(options, function (err, res, inhalt) {
 
-                resolve(inhalt,res);
                 //console.log(inhalt);
+                try {
+                    let result = JSON.parse(inhalt);
 
-                let result = JSON.parse(inhalt);
+                    let travel_mode = (result.routes[0].legs[0].steps[0].travel_mode);
+                    let travel_secs = (result.routes[0].legs[0].duration.value); // travel time in seconds, need to standardize to compare
+                    let travel_time = (result.routes[0].legs[0].duration.text);
 
-                let travel_mode = (result.routes[0].legs[0].steps[0].travel_mode);
-                let travel_secs = (result.routes[0].legs[0].duration.value); // travel time in seconds, need to standardize to compare
-                let travel_time = (result.routes[0].legs[0].duration.text);
+                    data.push([travel_mode, travel_time, travel_secs]);
 
-                data.push([travel_mode,travel_time,travel_secs]);
+                    resolve(inhalt, res);
+
+                } catch (err) {
+                    reject(err)
+                }
+
 
             })
         })
-            .catch((err) => {
-                console.log(err);
-            });
     }
 
+    /*
     function gas_api () {
         return new Promise (function (resolve, reject) {
 
@@ -223,13 +218,13 @@ router.post('/', function (req, res) {
 
                 //TODO: need to figure out why this is not working the way it is supposed to !!!!!!!!!!!!!!!!!!!!!!!!
                 //const start_city = start.split(',').slice(-3);
-                const start_city = "Boston, MA";
+                //const start_city = "Boston, MA";
 
-                /* Post request setup to the Wolfram API for Gas Price Avg */
+                //* Post request setup to the Wolfram API for Gas Price Avg
                 const options = { method: 'GET',
                     url: 'http://api.wolframalpha.com/v2/query',
                     qs:
-                        { input: 'average gas prices in ' + start_city,
+                        { input: 'average gas prices in ' + start.split(',').slice(-3),//start_city,
                             appid: WOLFRAM },
                     headers:
                         { 'Postman-Token': '7ba724fc-fec2-4b18-bc17-f156e35458d4',
@@ -264,23 +259,19 @@ router.post('/', function (req, res) {
                     price_data.push(['DRIVING',cost.toFixed(2)]);
                     console.log(price_data);
 
+
                     resolve(inhalt,res);
 
                 })
             }
             catch(err){
+                reject(err);
                 console.log(err);
             }
+
         })
-            .catch((err) => {
-                console.log(err);
-            });
     }
-
-
-
-
-
+    */
 
 
     /* ------------------------------------- */
@@ -290,17 +281,19 @@ router.post('/', function (req, res) {
     const driving = driving_api();
     const cycling = cycling_api();
 
-    const driving_cost = gas_api();
+    //const driving_cost = gas_api();
 
 
     /* ------------------------------------- */
 
     // This promise.all gathers all the data from API calls, sorts the data in order, and spits it out in a res.render
 
-    Promise.all([walking,cycling,driving])
-        .then(function(){
+    Promise.all([walking, cycling, driving])
+        .then(function () {
 
-            data = data.sort(function(a,b){return a[2] - b[2];}); // Sorts the data by travel time increasing
+            data = data.sort(function (a, b) {
+                return a[2] - b[2];
+            }); // Sorts the data by travel time increasing
             console.log(data);
 
             for (let i = 0; i < data.length; i++) {
@@ -308,28 +301,95 @@ router.post('/', function (req, res) {
                 durations.push(data[i][1]);
             }
 
-    })
-        .then(function(){
-            Promise.all([driving_cost])
-                .then(function () {
-                    res.render('results', {
-                        title: 'Compare Your Commute',
-                        duration: durations,
-                        start: start,
-                        end: end,
-                        mode: modes,
-                        prices: price_data
+        })
+        .then(function () {
+            return new Promise(function (resolve) {
+                try {
+                    // Grabs the City, State, and Country of the start address
 
-                    });
-             })
+                    //TODO: need to figure out why this is not working the way it is supposed to !!!!!!!!!!!!!!!!!!!!!!!!
+                    //const start_city = start.split(',').slice(-3);
+                    //const start_city = "Boston, MA";
 
+                    /* Post request setup to the Wolfram API for Gas Price Avg */
+                    const options = {
+                        method: 'GET',
+                        url: 'http://api.wolframalpha.com/v2/query',
+                        qs:
+                            {
+                                input: 'average gas prices in ' + start.split(',').slice(-3),//start_city,
+                                appid: WOLFRAM
+                            },
+                        headers:
+                            {
+                                'Postman-Token': '7ba724fc-fec2-4b18-bc17-f156e35458d4',
+                                'cache-control': 'no-cache'
+                            }
+                    };
+
+
+                    request(options, function (err, res, inhalt) {
+
+                        let params = {
+
+                            ignoreAttributes: true,
+                            ignoreNameSpace: false,
+                            allowBooleanAttributes: false,
+                            parseNodeValue: true,
+                            parseAttributeValue: false,
+                            trimValues: true,
+                            localeRange: "", //To support non english character in tag/attribute values.
+                            parseTrueNumberOnly: false,
+                        };
+
+                        const tObj = parser.getTraversalObj(inhalt, params);
+                        const jsonObj = parser.convertToJson(tObj, params);
+
+                        let dpg = jsonObj.queryresult.pod[1].subpod.plaintext;
+                        dpg = parseFloat(dpg.substr(1, 6));
+
+                        console.log(drive_distance / 1609.344 + " miles");
+
+                        let cost = (drive_distance / 1609.344) * dpg / 20; // using 20 as an estimated average mpg
+
+                        price_data.push(['DRIVING', cost.toFixed(2)]);
+                        console.log(price_data);
+
+
+                        resolve(inhalt, res);
+
+                    })
+                } catch (err) {
+                    //reject(err);
+                    console.log(err);
+                }
+
+            });
+        })
+
+        .then(function () {
+            res.render('results', {
+                title: 'Compare Your Commute',
+                duration: durations,
+                start: start,
+                end: end,
+                mode: modes,
+                prices: price_data
+
+            });
+        })
+        .catch(function (err) {
+            console.log(err);
+            res.render('error', {
+                message: err
+            })
         });
 
-
-
-
-
 });
+
+
+
+
 
 
 module.exports = router;
