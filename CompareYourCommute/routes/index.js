@@ -9,10 +9,16 @@ const GOOGLE_DIRECTIONS = keys.KEYS.GOOGLE_DIRECTIONS_KEY;
 //const MYGASFEED = keys.GAS_FEED_KEY; // Removed because of out-dated data
 const WOLFRAM = keys.KEYS.WOLFRAM_KEY;
 const UBER = keys.KEYS.UBER_SERVER_TOKEN;
+const FACEBOOK = keys.FACEBOOK.APP_ID;
+const MAPQUEST = keys.KEYS.MAPQUEST_KEY;
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/CompareYourCommute', {useNewUrlParser: true});
+const db = mongoose.connection;
+const Schema = mongoose.Schema;
 
 /* From stack overflow - for parsing POST data */
 const bodyParser = require("body-parser");
-
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -31,14 +37,19 @@ router.use(bodyParser.json());
 
 /* GET home page. */
 router.get('/', function(req,res,next) {
-    res.render('index', {title: 'Compare Your Commute'});
+    res.render('initial', {app_id: FACEBOOK});
+
+});
+
+router.get('/search', function(req,res,next) {
+    res.render('search.jade',{app_id: FACEBOOK});
 
 });
 
 
 // -------------------------------------------------------------------------------------------------------
 
-router.post('/', function (req, res) {
+router.post('/search', function (req, res) {
 
 
     // Set up API calls
@@ -55,6 +66,8 @@ router.post('/', function (req, res) {
     let durations = [];
 
     let drive_distance;
+
+    let map;
 
     // Input form data for start and end addresses
     const inputdata =
@@ -223,69 +236,7 @@ router.post('/', function (req, res) {
         })
     }
 
-    /*
-    function gas_api () {
-        return new Promise (function (resolve, reject) {
 
-            try {
-                // Grabs the City, State, and Country of the start address
-
-                //TODO: need to figure out why this is not working the way it is supposed to !!!!!!!!!!!!!!!!!!!!!!!!
-                //const start_city = start.split(',').slice(-3);
-                //const start_city = "Boston, MA";
-
-                //* Post request setup to the Wolfram API for Gas Price Avg
-                const options = { method: 'GET',
-                    url: 'http://api.wolframalpha.com/v2/query',
-                    qs:
-                        { input: 'average gas prices in ' + start.split(',').slice(-3),//start_city,
-                            appid: WOLFRAM },
-                    headers:
-                        { 'Postman-Token': '7ba724fc-fec2-4b18-bc17-f156e35458d4',
-                            'cache-control': 'no-cache' } };
-
-
-                request(options, function (err,res,inhalt) {
-
-
-                    let params = {
-
-                        ignoreAttributes : true,
-                        ignoreNameSpace : false,
-                        allowBooleanAttributes : false,
-                        parseNodeValue : true,
-                        parseAttributeValue : false,
-                        trimValues: true,
-                        localeRange: "", //To support non english character in tag/attribute values.
-                        parseTrueNumberOnly: false,
-                    };
-
-                    const tObj = parser.getTraversalObj(inhalt,params);
-                    const jsonObj = parser.convertToJson(tObj,params);
-
-                    let dpg = jsonObj.queryresult.pod[1].subpod.plaintext;
-                    dpg = parseFloat(dpg.substr(1,6));
-
-                    console.log(drive_distance/1609.344 + " miles");
-
-                    let cost = (drive_distance/1609.344)*dpg/20; // using 20 as an estimated average mpg
-
-                    price_data.push(['DRIVING',cost.toFixed(2)]);
-                    console.log(price_data);
-
-
-                    resolve(inhalt,res);
-
-                })
-            }
-            catch(err){
-                reject(err);
-                console.log(err);
-            }
-
-        })
-    }
-    */
 
 
     /* ------------------------------------- */
@@ -294,6 +245,7 @@ router.post('/', function (req, res) {
     const walking = walking_api();
     const driving = driving_api();
     const cycling = cycling_api();
+
 
     //const driving_cost = gas_api();
 
@@ -348,13 +300,19 @@ router.post('/', function (req, res) {
 
                         let result = JSON.parse(inhalt);
 
-                        for (let k = 0; k < result.prices.length; k++){
-                            const each_result = result.prices[k];
-                            const each_mode = result.prices[k].localized_display_name;
-                            if(each_mode in uber_mode_options){
-                                let mode = uber_mode_options[each_mode];
-                                price_data.push([mode,each_result.estimate]);
-                                data.push([mode, time_convert(each_result.duration), each_result.duration])
+                        if (result.code == 'distance_exceeded'){
+                            price_data.push(['Uber','Distance exceeds 100mi']);
+                            data.push(['Uber', 'Distance exceeds 100mi', Number.MAX_SAFE_INTEGER])
+                        }
+                        else {
+                            for (let k = 0; k < result.prices.length; k++) {
+                                const each_result = result.prices[k];
+                                const each_mode = result.prices[k].localized_display_name;
+                                if (each_mode in uber_mode_options) {
+                                    let mode = uber_mode_options[each_mode];
+                                    price_data.push([mode, each_result.estimate]);
+                                    data.push([mode, time_convert(each_result.duration), each_result.duration])
+                                }
                             }
                         }
 
@@ -426,9 +384,11 @@ router.post('/', function (req, res) {
 
                         console.log(drive_distance / 1609.344 + " miles");
 
-                        let cost = (drive_distance / 1609.344) * dpg / 20; // using 20 as an estimated average mpg
+                        // Average 2019 passenger car gets a combined 27mpg
+                        let cost_low = (drive_distance / 1609.344) * dpg / 33; // using 33 as an estimated hwy mpg
+                        let cost_high = (drive_distance / 1609.344) * dpg / 21; // using 21 as an estimated city mpg
 
-                        price_data.push(['Driving', '$'+cost.toFixed(2)]);
+                        price_data.unshift(['Driving', '$'+cost_low.toFixed(2) + '-' + cost_high.toFixed(2)]);
                         console.log(price_data);
 
 
@@ -450,7 +410,9 @@ router.post('/', function (req, res) {
                 start: start,
                 end: end,
                 mode: modes,
-                prices: price_data
+                prices: price_data,
+                app_id: FACEBOOK,
+                mq_key: MAPQUEST
 
             });
         })

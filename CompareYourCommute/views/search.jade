@@ -1,0 +1,71 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Initial
+  body
+    title Compare Your Commute
+
+    //TODO: Need to display user information if logged in - FB profile pic (maybe), name
+
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Bootstrap CSS
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Work+Sans:400,700', rel='stylesheet', type='text/css')
+    style.
+      body {
+        font-family: 'Work Sans', sans-serif;
+        text-align: center;
+        background: lightskyblue;
+      }
+      .container {
+        margin-top: 100px;
+      }
+      #box1
+      {
+        height: 30px;
+        min-width: 300px;
+        font-size:11pt;
+      }
+      #box2 {
+        height:30px;
+        width: 300px;
+        font-size:11pt;
+      }
+      #fbLogout {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      #fbLogin {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+
+    .container
+      h2 Please Enter Your Search Parameters
+      br
+
+      form(name='find-duration', method='post')
+        .input
+          span.label Start Address:
+          input#box1(name='start_address', placeholder='4020 Coriolis Loop, Eureka, OR 98765')
+        br
+        .input
+          span.label End Address:
+          input#box2(name='end_address', placeholder='1640 Riverside Dr, Hill Valley, CA')
+        br
+        .actions
+          input(type='submit', value='Submit')
+
+
+          //TODO: Need to figure out how to find out if user is logged in and display appropriate button
+          //TODO: Need to figure out how to connect these buttons to actual functions
+      input#fbLogin.btn.btn-primary.btn-primary(type='button', value='Login with Facebook', onclick='fbLogin()')
+      input#fbLogout.btn.btn-primary.btn-primary(type='button', value='Log out of Facebook', onclick='fbLogout()')
+
+
+  // ---------------------------------------------------------------------------------------

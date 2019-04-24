@@ -1,17 +1,48 @@
-
+//TODO: Make look pretty like other pages
 extends layout
 
 block content
     h1= title
-    p Welcome to #{title}
 
-    p From #{start}
-    p To #{end}
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    style.
+        body {
+            font-family: 'Work Sans', sans-serif;
+            text-align: center;
+            background: lightskyblue;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        #image {
+            position: relative;
+
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        #travel-table {
+            position: absolute;
+            left: 20px;
+        }
+
+        #price-table {
+            position: absolute;
+            right: 20px;
+        }
+
+    .container
+        p From #{start}
+        p To #{end}
 
 
-    h2 Sorted by Travel Time:
-    #table-wrapper
-        table#desc
+        table#travel-table
+           caption By Travel Time
            tr
                th Transit Mode
                th Duration
@@ -25,27 +56,32 @@ block content
                             td #{val}
                             td None Found
 
-    h2 Sorted by price:
-    table
-        tr
-            th Transit Mode
-            th Price Estimate
-            each value in prices
-                    tr
-                        td #{value[0]}
-                        td #{value[1]}
+
+        table#price-table
+            caption By Price
+            tr
+                th Transit Mode
+                th Price Estimate
+                each value in prices
+                        tr
+                            td #{value[0]}
+                            td #{value[1]}
+
+        button#newsearch(onclick="move()") New Search
+        script.
+            function move() {
+                window.location.href = '/search'
+            }
+
+        br
+
+        img.image#image(src="https://www.mapquestapi.com/staticmap/v5/map?&size=800,450&key="+ mq_key + "&locations="+ start +"|flag-start||"+ end +"|flag-end" alt="Location Map" )
 
 
 
 
+        noscript
+           strong JavaScript appears to be disabled or not supported on your browser.
+           p Please re-enable or use a supported browser for full functionality.
 
-    noscript
-       strong JavaScript appears to be disabled or not supported on your browser.
-       p Please re-enable or use a supported browser for full functionality.
 
-
-    button(onclick="move()") New Search
-    script.
-        function move() {
-            window.location.href = '/'
-        }
