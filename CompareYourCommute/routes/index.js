@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 const keys = require('../config/keys');
+const passport = require('passport');
 
 const parser = require('fast-xml-parser');
 
@@ -9,16 +10,12 @@ const GOOGLE_DIRECTIONS = keys.KEYS.GOOGLE_DIRECTIONS_KEY;
 //const MYGASFEED = keys.GAS_FEED_KEY; // Removed because of out-dated data
 const WOLFRAM = keys.KEYS.WOLFRAM_KEY;
 const UBER = keys.KEYS.UBER_SERVER_TOKEN;
-const FACEBOOK = keys.FACEBOOK.APP_ID;
 const MAPQUEST = keys.KEYS.MAPQUEST_KEY;
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/CompareYourCommute', {useNewUrlParser: true});
-const db = mongoose.connection;
-const Schema = mongoose.Schema;
 
 /* From stack overflow - for parsing POST data */
 const bodyParser = require("body-parser");
+
 
 /** bodyParser.urlencoded(options)
  * Parses the text as URL encoded data (which is how browsers tend to send form data from regular forms set to POST)
@@ -33,24 +30,68 @@ router.use(bodyParser.urlencoded({
  */
 router.use(bodyParser.json());
 
+
+
+
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect('/auth/google');
+}
 /*----------------------------------------------------------------------*/
+
+
+router.get('/account', ensureAuthenticated, function(req, res){
+    res.render('account', { user: req.user });
+});
+
+
+// GET /auth/google
+router.get('/auth/google', passport.authenticate('google', { scope: [
+        'email', 'profile']
+}));
+
+// GET /auth/google/callback
+router.get( '/auth/google/callback',(req,res)=>
+    passport.authenticate( 'google', function(err,user,info){
+
+        res.render('initial', {name: user.displayName, id: user._id, last_in: user.last_in, pic:user.picture});
+    })(req,res));
+
+router.get('/logout', function(req, res){
+    req.logout();
+    res.render('initial', { status: "Succesfully Logged Out"});
+});
+
+//----------------------------------------------------
 
 /* GET home page. */
 router.get('/', function(req,res,next) {
-    res.render('initial', {app_id: FACEBOOK});
-
+    const params = req.query.params;
+    if (params) { // These params passed in from google + db
+        res.render('initial', {name: params.displayName, id: params.id, last_in: params.last_in});
+    }
+    res.render('initial');
 });
 
 router.get('/search', function(req,res,next) {
-    res.render('search.jade',{app_id: FACEBOOK});
-
+    if (req.query.name == "undefined")
+        res.render('search.jade');
+    else
+        res.render('search.jade',{name: req.query.name});
 });
 
 
 // -------------------------------------------------------------------------------------------------------
 
-router.post('/search', function (req, res) {
 
+// -------------------------------------------------------------------------------------------------------
+
+router.post('/search', function (req, res) {
 
     // Set up API calls
 
@@ -67,13 +108,14 @@ router.post('/search', function (req, res) {
 
     let drive_distance;
 
-    let map;
 
     // Input form data for start and end addresses
+    // Also added a name field to pass in name when logged in
     const inputdata =
         {
             start: req.body.start_address,
-            destination: req.body.end_address
+            destination: req.body.end_address,
+            name: req.body.name
         };
 
     // Function to convert seconds into hours and minutes
@@ -88,6 +130,9 @@ router.post('/search', function (req, res) {
         }
     }
 
+    // ============================== //
+    //       Main API Calls           //
+    //=============================== //
     function walking_api() {
         return new Promise(function (resolve, reject) {
 
@@ -246,10 +291,6 @@ router.post('/search', function (req, res) {
     const driving = driving_api();
     const cycling = cycling_api();
 
-
-    //const driving_cost = gas_api();
-
-
     /* ------------------------------------- */
 
     // This promise.all gathers all the data from 3 Google API calls
@@ -266,8 +307,6 @@ router.post('/search', function (req, res) {
 
                     // Uber Price Estimate Params
 
-                    console.log('start is ', start_coord, typeof(start_coord[0])); //TODO Fix this
-
                     const options = {
                         method: 'GET',
                         url: 'https://api.uber.com/v1.2/estimates/price?',
@@ -277,7 +316,6 @@ router.post('/search', function (req, res) {
                                 start_longitude: start_coord[1],
                                 end_latitude: end_coord[0],
                                 end_longitude: end_coord[1]
-
                             },
                         headers:
                             { 'Postman-Token': 'b4efb06c-6e5c-4573-a6e7-04c688c2c70c',
@@ -285,7 +323,6 @@ router.post('/search', function (req, res) {
                                 'Content-Type': 'application/json',
                                 Authorization: UBER }
                     };
-
 
                     request(options, function (err, res, inhalt) {
 
@@ -321,7 +358,6 @@ router.post('/search', function (req, res) {
 
                     })
                 } catch (err) {
-                    reject(err);
                     console.log(err);
                 }
 
@@ -329,12 +365,14 @@ router.post('/search', function (req, res) {
 
         })
         .then(function () {
+            // Sorts the travel time data in increasing order
 
             data = data.sort(function (a, b) {
                 return a[2] - b[2];
-            }); // Sorts the data by travel time increasing
+            });
             console.log(data);
 
+            // Push travel time data to arrays
             for (let i = 0; i < data.length; i++) {
                 modes.push(data[i][0]);
                 durations.push(data[i][1]);
@@ -342,16 +380,20 @@ router.post('/search', function (req, res) {
 
         })
         .then(function () {
+            //Gas Price API Call to Wolfram Alpha
+            //NOTE: This code is designed for passenger cars that are NOT hybrid
+            // that use regular gasoline. Prices and mpg do not reflect premium, diesel,
+            // or $/g on gas guzzlers or conversely, on hybrids or electrics.
+
             return new Promise(function (resolve) {
                 try {
-
 
                     /* Post request setup to the Wolfram API for Gas Price Avg */
                     const options = {
                         method: 'GET',
                         url: 'http://api.wolframalpha.com/v2/query',
                         qs:
-                            {                                     // Grabs the City, State, and Country of the start address
+                            {   // Grabs the City, State, and Country of the start address
                                 input: 'average gas prices in ' + start.split(',').slice(-3),//start_city,
                                 appid: WOLFRAM
                             },
@@ -365,7 +407,6 @@ router.post('/search', function (req, res) {
                     request(options, function (err, res, inhalt) {
 
                         let params = {
-
                             ignoreAttributes: true,
                             ignoreNameSpace: false,
                             allowBooleanAttributes: false,
@@ -376,24 +417,25 @@ router.post('/search', function (req, res) {
                             parseTrueNumberOnly: false,
                         };
 
+                        // Wolfram returns in xml, need to parse here
                         const tObj = parser.getTraversalObj(inhalt, params);
                         const jsonObj = parser.convertToJson(tObj, params);
 
+                        // Calculations for miles, $ per gallon of fuel at given price, and $ for trip
                         let dpg = jsonObj.queryresult.pod[1].subpod.plaintext;
                         dpg = parseFloat(dpg.substr(1, 6));
 
                         console.log(drive_distance / 1609.344 + " miles");
 
-                        // Average 2019 passenger car gets a combined 27mpg
+                        // Average 2019 passenger car gets a combined 27mpg,
+                        // low around 21 and high around 33
                         let cost_low = (drive_distance / 1609.344) * dpg / 33; // using 33 as an estimated hwy mpg
                         let cost_high = (drive_distance / 1609.344) * dpg / 21; // using 21 as an estimated city mpg
 
                         price_data.unshift(['Driving', '$'+cost_low.toFixed(2) + '-' + cost_high.toFixed(2)]);
                         console.log(price_data);
 
-
                         resolve(inhalt, res);
-
                     })
                 } catch (err) {
                     //reject(err);
@@ -411,8 +453,8 @@ router.post('/search', function (req, res) {
                 end: end,
                 mode: modes,
                 prices: price_data,
-                app_id: FACEBOOK,
-                mq_key: MAPQUEST
+                mq_key: MAPQUEST,
+                name: inputdata.name
 
             });
         })
@@ -424,7 +466,6 @@ router.post('/search', function (req, res) {
         });
 
 });
-
 
 
 

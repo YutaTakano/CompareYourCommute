@@ -8,11 +8,15 @@ html(lang='en')
         // Bootstrap CSS
         link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
         link(href='https://fonts.googleapis.com/css?family=Work+Sans:400,700', rel='stylesheet', type='text/css')
+        link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
+        link(rel='icon', href='/favicon.ico', type='image/x-icon')
         style.
             body {
                 font-family: 'Work Sans', sans-serif;
                 text-align: center;
                 background: lightskyblue;
+            }
+
 
                 .container {
                     margin-top: 100px;
@@ -37,10 +41,10 @@ html(lang='en')
                     position: absolute;
                     right: 20px;
                 }
-                }
+
+
 
     body
-
     .container
         .jumbotron.text-center.m-4
             h1 From #{start}
@@ -73,11 +77,14 @@ html(lang='en')
                             td #{value[0]}
                             td #{value[1]}
 
-        button#newsearch(onclick="move()") New Search
-        script.
-            function move() {
-                window.location.href = '/search'
-            }
+
+        if (!name)
+            a(href = "/search")
+                button(type = "button") New Search
+        else
+            a(href = "/search?" + "name=" + name)
+                button(type = "button") New Search
+
 
         br
 
@@ -89,5 +96,4 @@ html(lang='en')
         noscript
            strong JavaScript appears to be disabled or not supported on your browser.
            p Please re-enable or use a supported browser for full functionality.
-
 

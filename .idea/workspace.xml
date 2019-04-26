@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80af431-af37-46f2-8fe0-833d8cbfbd2c" name="Default Changelist" comment="">
+    <list default="true" id="f80af431-af37-46f2-8fe0-833d8cbfbd2c" name="Default Changelist" comment="Made results look pretty">
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger.turtle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTigerLAS.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/_mdb_catalog.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-0--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-0-8045493294724704404.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-2--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-4--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-24T18-19-28Z-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T00-30-22Z-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T00-38-20Z-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T01-47-22Z-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T09-15-00Z-00000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-1--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-1-8045493294724704404.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-3--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-5--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-6--918911082611573859.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/journal/WiredTigerLog.0000000005" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/journal/WiredTigerPreplog.0000000001" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/journal/WiredTigerPreplog.0000000002" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/mongod.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/sizeStorer.wt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/storage.bson" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CompareYourCommute/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompareYourCommute/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/routes/users.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/views/initial.jade" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/views/initial.jade" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompareYourCommute/views/results.jade" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/views/results.jade" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompareYourCommute/views/search.jade" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/views/search.jade" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -47,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            <state relative-caret-position="270">
+              <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -65,8 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/initial.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="38" />
+            <state relative-caret-position="495">
+              <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -74,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/layout.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="57" />
+            <state>
+              <caret selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -83,8 +117,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/results.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1213">
-              <caret line="81" column="10" lean-forward="true" selection-start-line="81" selection-start-column="10" selection-end-line="81" selection-end-column="10" />
+            <state relative-caret-position="233">
+              <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -93,7 +127,7 @@
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/search.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="450">
-              <caret line="71" lean-forward="true" selection-end-line="71" />
+              <caret line="66" selection-end-line="66" />
             </state>
           </provider>
         </entry>
@@ -264,12 +298,12 @@
       <workItem from="1553040415159" duration="275000" />
       <workItem from="1553195216618" duration="914000" />
       <workItem from="1556222990664" duration="2979000" />
-      <workItem from="1556249656752" duration="8296000" />
+      <workItem from="1556249656752" duration="9013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13653000" />
+    <option name="totallyTimeSpent" value="14370000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -284,7 +318,7 @@
     <frame x="40" y="23" width="1400" height="825" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -305,6 +339,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Made results look pretty" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made results look pretty" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/bin/www" />
@@ -363,13 +401,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CompareYourCommute/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -377,31 +408,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/search.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
-          <caret line="71" lean-forward="true" selection-end-line="71" />
+          <caret line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CompareYourCommute/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/initial.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="20" column="12" lean-forward="true" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="38" />
+        <state relative-caret-position="495">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/results.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1213">
-          <caret line="81" column="10" lean-forward="true" selection-start-line="81" selection-start-column="10" selection-end-line="81" selection-end-column="10" />
+        <state relative-caret-position="233">
+          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
         </state>
       </provider>
     </entry>

@@ -2,11 +2,11 @@ doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
-    title Initial
   body
     title Compare Your Commute
 
     //TODO: Need to display user information if logged in - FB profile pic (maybe), name
+
 
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -22,28 +22,27 @@ html(lang='en')
       .container {
         margin-top: 100px;
       }
-      #box1
+      #google
       {
         height: 30px;
         min-width: 300px;
         font-size:11pt;
-      }
-      #box2 {
-        height:30px;
-        width: 300px;
-        font-size:11pt;
-      }
-      #fbLogout {
         position: absolute;
-        top: 20px;
-        right: 20px;
-      }
-      #fbLogin {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+        top: 30px;
+        right: 30px;
+
       }
 
+    if (name)
+      br
+      h1 Welcome, #{name}
+
+    if (name)
+      a(href = "/logout")
+        button#google(type="button") Log out of Google
+    else
+      a(href = "/auth/google")
+        button#google(type="button") Login with Google
 
     .container
       h2 Please Enter Your Search Parameters
@@ -58,14 +57,10 @@ html(lang='en')
           span.label End Address:
           input#box2(name='end_address', placeholder='1640 Riverside Dr, Hill Valley, CA')
         br
+        .input
+          input(type='hidden', name='name', value=name)
         .actions
           input(type='submit', value='Submit')
 
 
-          //TODO: Need to figure out how to find out if user is logged in and display appropriate button
-          //TODO: Need to figure out how to connect these buttons to actual functions
-      input#fbLogin.btn.btn-primary.btn-primary(type='button', value='Login with Facebook', onclick='fbLogin()')
-      input#fbLogout.btn.btn-primary.btn-primary(type='button', value='Log out of Facebook', onclick='fbLogout()')
-
-
-  // ---------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------
