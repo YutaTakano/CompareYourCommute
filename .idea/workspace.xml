@@ -1,44 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f80af431-af37-46f2-8fe0-833d8cbfbd2c" name="Default Changelist" comment="Made results look pretty">
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger.turtle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTiger.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/WiredTigerLAS.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/_mdb_catalog.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-0--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-0-8045493294724704404.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-2--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/collection-4--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-24T18-19-28Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T00-30-22Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T00-38-20Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T01-47-22Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/diagnostic.data/metrics.2019-04-26T09-15-00Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-1--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-1-8045493294724704404.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-3--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-5--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/index-6--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/journal/WiredTigerLog.0000000005" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/journal/WiredTigerPreplog.0000000001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/journal/WiredTigerPreplog.0000000002" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/mongod.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/sizeStorer.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/data/storage.bson" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CompareYourCommute/favicon.ico" afterDir="false" />
+    <list default="true" id="f80af431-af37-46f2-8fe0-833d8cbfbd2c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/routes/users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/views/initial.jade" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/views/initial.jade" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompareYourCommute/views/results.jade" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/views/results.jade" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompareYourCommute/views/search.jade" beforeDir="false" afterPath="$PROJECT_DIR$/CompareYourCommute/views/search.jade" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -61,15 +26,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CompareYourCommute/config/keys.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/javascript/nodejs/10.15.3/core-modules/net.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="148">
@@ -81,8 +37,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            <state relative-caret-position="390">
+              <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -117,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/results.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            <state relative-caret-position="1020">
+              <caret line="68" column="23" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -298,12 +254,27 @@
       <workItem from="1553040415159" duration="275000" />
       <workItem from="1553195216618" duration="914000" />
       <workItem from="1556222990664" duration="2979000" />
-      <workItem from="1556249656752" duration="9013000" />
+      <workItem from="1556249656752" duration="10103000" />
     </task>
+    <task id="LOCAL-00001" summary="Made results look pretty">
+      <created>1556290133491</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1556290133493</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Made results look pretty">
+      <created>1556290577724</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1556290577725</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14370000" />
+    <option name="totallyTimeSpent" value="15460000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -321,9 +292,10 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24945612" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" visible="true" weight="0.3287858" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49963742" visible="true" weight="0.3287858" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49963742" weight="0.3287858" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39977974" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -422,13 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CompareYourCommute/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/initial.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -436,10 +401,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CompareYourCommute/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CompareYourCommute/views/results.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        <state relative-caret-position="1020">
+          <caret line="68" column="23" selection-start-line="68" selection-start-column="23" selection-end-line="68" selection-end-column="23" />
         </state>
       </provider>
     </entry>
