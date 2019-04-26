@@ -1,52 +1,58 @@
 //TODO: Make look pretty like other pages
-extends layout
+doctype html
+html(lang='en')
+    head
+        title Compare Your Commute
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        // Bootstrap CSS
+        link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO', crossorigin='anonymous')
+        link(href='https://fonts.googleapis.com/css?family=Work+Sans:400,700', rel='stylesheet', type='text/css')
+        style.
+            body {
+                font-family: 'Work Sans', sans-serif;
+                text-align: center;
+                background: lightskyblue;
 
-block content
-    h1= title
+                .container {
+                    margin-top: 100px;
+                }
 
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    style.
-        body {
-            font-family: 'Work Sans', sans-serif;
-            text-align: center;
-            background: lightskyblue;
-        }
+                #image {
+                    position: relative;
 
-        .container {
-            margin-top: 100px;
-        }
+                }
 
-        #image {
-            position: relative;
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
 
-        }
+                #travel-table {
+                    position: absolute;
+                    left: 20px;
+                }
 
-        table, th, td {
-            border: 1px solid black;
-        }
+                #price-table {
+                    position: absolute;
+                    right: 20px;
+                }
+                }
 
-        #travel-table {
-            position: absolute;
-            left: 20px;
-        }
-
-        #price-table {
-            position: absolute;
-            right: 20px;
-        }
+    body
 
     .container
-        p From #{start}
-        p To #{end}
+        .jumbotron.text-center.m-4
+            h1 From #{start}
+            h1 To #{end}
 
 
-        table#travel-table
-           caption By Travel Time
-           tr
-               th Transit Mode
-               th Duration
-               each val, index in mode
+            table#travel-table.table.table-hover
+                caption By Travel Time
+                tr
+                    th Transit Mode
+                    th Duration
+                each val, index in mode
                     if (duration[index])
                         tr
                             td #{val}
@@ -57,11 +63,11 @@ block content
                             td None Found
 
 
-        table#price-table
-            caption By Price
-            tr
-                th Transit Mode
-                th Price Estimate
+            table#price-table.table.table-hover
+                caption By Price
+                tr
+                    th Transit Mode
+                    th Price Estimate
                 each value in prices
                         tr
                             td #{value[0]}
