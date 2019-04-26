@@ -1,8 +1,18 @@
 //TODO: Make look pretty like other pages
 extends layout
 
+head
+    title Compare Your Commute
+
+    link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
+    link(rel='icon', href='/favicon.ico', type='image/x-icon')
+
+
 block content
     h1= title
+
+
+    p #{name}
 
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -36,6 +46,7 @@ block content
             right: 20px;
         }
 
+    body
     .container
         p From #{start}
         p To #{end}
@@ -67,11 +78,14 @@ block content
                             td #{value[0]}
                             td #{value[1]}
 
-        button#newsearch(onclick="move()") New Search
-        script.
-            function move() {
-                window.location.href = '/search'
-            }
+
+        if (!name)
+            a(href = "/search")
+                button(type = "button") New Search
+        else
+            a(href = "/search?" + "name=" + name)
+                button(type = "button") New Search
+
 
         br
 
@@ -83,5 +97,4 @@ block content
         noscript
            strong JavaScript appears to be disabled or not supported on your browser.
            p Please re-enable or use a supported browser for full functionality.
-
 
