@@ -1,3 +1,11 @@
 User4 - Multiple travelers
 
+
+Update:
+
+This feature has not been implemented in the current version of the app. 
+
+
+
+----------------------------------------------------------------------------------
 If a user is traveling with up to 3 more people, the user will be able to input the number of additional travelers which will be reflected in the price comparison since some transit options will split the travel fare and some will just multiply per head. 

@@ -2,6 +2,19 @@ User Story 2 - Logged in user
 
 Refer to user1 for login story.
 
+
+Update: 
+
+A logged in user should be able to see when his/her last login time was.
+Instead of having all data in one table and then sorting, two tables are shown, one for price, one for time. 
+
+
+
+
+
+
+--------------------------------------------------------------------------------------
+
 A logged in user should be able to access their saved locations and routes and select from these to find a route without needing to type in an address. The user can also type in a new address for start or destination as well as use location services for start and potentially save it as a favorite location for later access. 
 
 The routes that are shown will be sortable either by transit time or transit price. 

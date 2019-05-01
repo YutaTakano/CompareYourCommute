@@ -2,42 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77109dda-bdb5-4613-8f87-ff2bed592cf5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/data/WiredTiger" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/WiredTiger.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/WiredTiger.turtle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/WiredTiger.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/WiredTigerLAS.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/_mdb_catalog.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/collection-0--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/collection-0-8045493294724704404.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/collection-2--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/collection-4--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/diagnostic.data/metrics.2019-04-24T18-19-28Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/diagnostic.data/metrics.2019-04-26T00-30-22Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/diagnostic.data/metrics.2019-04-26T00-38-20Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/diagnostic.data/metrics.2019-04-26T01-47-22Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/diagnostic.data/metrics.2019-04-26T09-15-00Z-00000" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/index-1--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/index-1-8045493294724704404.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/index-3--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/index-5--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/index-6--918911082611573859.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/journal/WiredTigerLog.0000000005" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/journal/WiredTigerPreplog.0000000001" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/journal/WiredTigerPreplog.0000000002" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/mongod.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/sizeStorer.wt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/storage.bson" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/initial.jade" beforeDir="false" afterPath="$PROJECT_DIR$/views/initial.jade" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/results.jade" beforeDir="false" afterPath="$PROJECT_DIR$/views/results.jade" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/search.jade" beforeDir="false" afterPath="$PROJECT_DIR$/views/search.jade" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/WiredTiger.turtle" beforeDir="false" afterPath="$PROJECT_DIR$/data/WiredTiger.turtle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/WiredTiger.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/WiredTiger.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/collection-0-8045493294724704404.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/collection-0-8045493294724704404.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/collection-2--918911082611573859.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/collection-2--918911082611573859.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/collection-4--918911082611573859.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/collection-4--918911082611573859.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/index-3--918911082611573859.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/index-3--918911082611573859.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/index-5--918911082611573859.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/index-5--918911082611573859.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/index-6--918911082611573859.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/index-6--918911082611573859.wt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/journal/WiredTigerLog.0000000005" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/sizeStorer.wt" beforeDir="false" afterPath="$PROJECT_DIR$/data/sizeStorer.wt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -81,7 +56,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="116">
+            <state relative-caret-position="132">
               <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
               <folding>
                 <element signature="e#1121#1147#0" />
@@ -125,7 +100,7 @@
         <entry file="file://$PROJECT_DIR$/views/results.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="471">
-              <caret line="86" column="16" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="16" />
+              <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -303,12 +278,12 @@
       <workItem from="1555653846363" duration="8939000" />
       <workItem from="1555902244919" duration="11630000" />
       <workItem from="1555974634224" duration="15135000" />
-      <workItem from="1556073333982" duration="49235000" />
+      <workItem from="1556073333982" duration="50361000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="135090000" />
+    <option name="totallyTimeSpent" value="136216000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -321,7 +296,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992658" visible="true" weight="0.11995178" />
       <window_info id="Structure" order="1" sideWeight="0.5007342" side_tool="true" weight="0.20735383" />
@@ -329,7 +303,7 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32959184" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22959183" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22959183" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2867347" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -337,7 +311,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32959184" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.20204082" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.20204082" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -471,7 +445,7 @@
     <entry file="file://$PROJECT_DIR$/views/results.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
-          <caret line="86" column="16" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="16" />
+          <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -538,7 +512,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
+        <state relative-caret-position="132">
           <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
           <folding>
             <element signature="e#1121#1147#0" />
